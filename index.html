@@ -1,16 +1,81 @@
 <!DOCTYPE html>
-<html>
-<head lang="uk">
+<html lang="uk">
+<head>
     <meta charset="UTF-8">
-    <title>My Page</title>
-
-
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyList</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<span class="product-item">
-		Apple
-		<span class="amount">4</span>
-	</span>
+
+    <main class="page">
+        <section class="products-card" aria-labelledby="products-title">
+            <h1 id="products-title" class="visually-hidden">Кошик покупок</h1>
+
+            <form class="add-form">
+                <label for="product-name" class="visually-hidden">Назва товару</label>
+                <input id="product-name" type="text" placeholder="Назва товару">
+                <button type="submit">Додати</button>
+            </form>
+
+            <ul class="products-list">
+                <li class="product product-bought">
+                    <p class="product-name">Помідори</p>
+                    <output class="counter">2</output>
+                    <button type="button">Не куплено</button>
+                </li>
+
+                <li class="product">
+                    <p class="product-name">Печиво</p>
+                    <menu class="controls">
+                        <li><button class="minus" type="button">-</button></li>
+                        <li><output class="counter">2</output></li>
+                        <li><button class="plus" type="button">+</button></li>
+                    </menu>
+                    <button type="button">Куплено</button>
+                    <button class="delete" type="button">×</button>
+                </li>
+
+                <li class="product">
+                    <p class="product-name editable">Сир</p>
+                    <menu class="controls">
+                        <li><button class="minus disabled" type="button">-</button></li>
+                        <li><output class="counter">1</output></li>
+                        <li><button class="plus" type="button">+</button></li>
+                    </menu>
+                    <button type="button">Куплено</button>
+                    <button class="delete" type="button">×</button>
+                </li>
+            </ul>
+        </section>
+
+        <aside class="summary-card" aria-label="Підсумок покупок">
+            <section class="summary-section">
+                <h2>Залишилося</h2>
+                <ul class="summary-list">
+                    <li>
+                        <strong>Печиво</strong>
+                        <output class="amount">2</output>
+                    </li>
+
+                    <li>
+                        <strong>Сир</strong>
+                        <output class="amount">1</output>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="summary-section">
+                <h2>Куплено</h2>
+                <ul class="summary-list">
+                    <li class="bought-label">
+                        <strong>Помідори</strong>
+                        <output class="amount">2</output>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </main>
+
 </body>
 </html>
