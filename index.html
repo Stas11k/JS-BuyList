@@ -15,36 +15,37 @@
             <form class="add-form">
                 <label for="product-name" class="visually-hidden">Назва товару</label>
                 <input id="product-name" type="text" placeholder="Назва товару">
-                <button type="submit">Додати</button>
+                <button type="submit" data-tooltip="Додати товар">Додати</button>
             </form>
 
             <ul class="products-list">
                 <li class="product product-bought">
                     <p class="product-name">Помідори</p>
                     <output class="counter">2</output>
-                    <button type="button">Не куплено</button>
+                    <button type="button" data-tooltip="Повернути до покупок">Не куплено</button>
                 </li>
 
                 <li class="product">
                     <p class="product-name">Печиво</p>
                     <menu class="controls">
-                        <li><button class="minus" type="button">-</button></li>
+                        <li><button class="minus" type="button" data-tooltip="Зменшити кількість">-</button></li>
                         <li><output class="counter">2</output></li>
-                        <li><button class="plus" type="button">+</button></li>
+                        <li><button class="plus" type="button" data-tooltip="Збільшити кількість">+</button></li>
                     </menu>
-                    <button type="button">Куплено</button>
-                    <button class="delete" type="button">×</button>
+                    <button type="button" data-tooltip="Позначити як куплене">Куплено</button>
+                    <button class="delete" type="button" data-tooltip="Видалити товар">×</button>
                 </li>
 
                 <li class="product">
                     <p class="product-name editable">Сир</p>
                     <menu class="controls">
-                        <li><button class="minus disabled" type="button">-</button></li>
+                        <li><button class="minus disabled" type="button" data-tooltip="Мінімальна кількість">-</button>
+                        </li>
                         <li><output class="counter">1</output></li>
-                        <li><button class="plus" type="button">+</button></li>
+                        <li><button class="plus" type="button" data-tooltip="Збільшити кількість">+</button></li>
                     </menu>
-                    <button type="button">Куплено</button>
-                    <button class="delete" type="button">×</button>
+                    <button type="button" data-tooltip="Позначити як куплене">Куплено</button>
+                    <button class="delete" type="button" data-tooltip="Видалити товар">×</button>
                 </li>
             </ul>
         </section>
@@ -76,6 +77,11 @@
             </section>
         </aside>
     </main>
+
+    <aside class="author-badge" aria-label="Інформація про автора роботи">
+        <p class="badge-title">BuyList</p>
+        <p class="badge-author">Created by:<br>Stanislav Dubyna</p>
+    </aside>
 
 </body>
 </html>
