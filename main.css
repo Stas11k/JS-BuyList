@@ -1,17 +1,63 @@
-.product-item {
-	background-color: gray;
-	display: inline-block;
-	height: 25px;
-	padding: 5px;
-	border-radius: 5px;
+* {
+    box-sizing: border-box;
 }
 
-.amount {
-	background-color: yellow;
-	border-radius: 10px;
-	
-	display: inline-block;
-	height: 20px;
-	width: 20px;
-	text-align: center;
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #d9d9d9;
+    color: #111;
+}
+
+.page {
+    width: min(100%, 980px);
+    margin: 0 auto;
+    padding: 28px 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(180px, 0.75fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.products-card, .summary-card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.products-card {
+    overflow: visible;
+}
+
+.summary-card {
+    overflow: hidden;
+}
+
+.products-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.product {
+    min-height: 72px;
+    padding: 16px;
+    border-top: 1px solid #ececec;
+    display: grid;
+    grid-template-columns: minmax(65px, 1fr) minmax(0, 0.5fr) 118px minmax(0, 0.5fr) 110px 34px;
+    column-gap: 8px;
+    row-gap: 8px;
+    align-items: center;
+    justify-items: stretch;
+}
+
+.product-bought {
+    grid-template-columns: minmax(65px, 1fr) minmax(0, 0.5fr) 118px minmax(0, 0.5fr) 110px 34px;
+}
+
+.product-name {
+    grid-column: 1;
+    margin: 0;
+    font-size: 16px;
 }
