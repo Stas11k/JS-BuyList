@@ -208,3 +208,69 @@ button {
     background: linear-gradient(#ef3434, #d71920);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 3px 0 #a9161b, 0 3px 6px rgba(0, 0, 0, 0.18);
 }
+
+.summary-section {
+    padding: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.summary-section:last-child {
+    border-bottom: none;
+}
+
+.summary-section h2 {
+    margin: 0;
+    padding: 20px 16px 22px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 24px;
+}
+
+.summary-list {
+    margin: 0;
+    padding: 20px 16px 22px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.summary-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background-color: #e8e8e8;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.amount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 7px;
+    background-color: #ff6f1a;
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: bold;
+    position: relative;
+}
+
+.bought-label strong {
+    text-decoration: line-through;
+}
+
+.bought-label .amount::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    top: 50%;
+    height: 2px;
+    background-color: white;
+    transform: translateY(-50%);
+}
