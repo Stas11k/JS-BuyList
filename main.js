@@ -3,7 +3,8 @@ const input = document.querySelector("#product-name");
 const productsList = document.querySelector(".products-list");
 const summarySections = document.querySelectorAll(".summary-section");
 
-let products = [];
+const STORAGE_KEY = "buy-list-products";
+let products = loadProducts();
 
 render();
 
@@ -22,12 +23,20 @@ form.addEventListener("submit", (event) => {
     });
     input.value = "";
     input.focus();
-    render();
+    saveAndRender();
 });
 
 productsList.addEventListener("click", (event) => {
     const button = event.target.closest("button");
-    if (!button)  return;
+    const name = event.target.closest(".product-name");
+    if (name) {
+        startEditingName(name);
+        return;
+    }
+    if (!button) {
+        return;
+    }
+
     const productElement = button.closest(".product");
     const id = Number(productElement.dataset.id);
     const product = products.find(item => item.id === id);
@@ -39,7 +48,7 @@ productsList.addEventListener("click", (event) => {
     if (button.dataset.action === "buy") product.bought = true;
     if (button.dataset.action === "unbuy") product.bought = false;
 
-    render();
+    saveAndRender();
 });
 
 function render() {
@@ -70,6 +79,7 @@ function createProductElement(product) {
         unbuyButton.type = "button";
         unbuyButton.textContent = "Не куплено";
         unbuyButton.dataset.action = "unbuy";
+        unbuyButton.dataset.tooltip = "Повернути до покупок";
         li.append(name, counter, unbuyButton);
         return li;
     }
@@ -79,14 +89,15 @@ function createProductElement(product) {
 
     const minusLi = document.createElement("li");
     const minusButton = document.createElement("button");
-
     minusButton.type = "button";
     minusButton.textContent = "-";
     minusButton.classList.add("minus");
+    minusButton.dataset.tooltip = "Зменшити кількість";
 
     if (product.count === 1) {
-        minusButton.disabled = true;
         minusButton.classList.add("disabled");
+        minusButton.disabled = true;
+        minusButton.dataset.tooltip = "Мінімальна кількість";
     }
 
     minusLi.append(minusButton);
@@ -96,11 +107,10 @@ function createProductElement(product) {
 
     const plusLi = document.createElement("li");
     const plusButton = document.createElement("button");
-
     plusButton.type = "button";
     plusButton.textContent = "+";
     plusButton.classList.add("plus");
-
+    plusButton.dataset.tooltip = "Збільшити кількість";
     plusLi.append(plusButton);
     controls.append(minusLi, counterLi, plusLi);
 
@@ -108,14 +118,42 @@ function createProductElement(product) {
     buyButton.type = "button";
     buyButton.textContent = "Куплено";
     buyButton.dataset.action = "buy";
+    buyButton.dataset.tooltip = "Позначити як куплене";
 
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.textContent = "×";
     deleteButton.classList.add("delete");
+    deleteButton.dataset.tooltip = "Видалити товар";
 
     li.append(name, controls, buyButton, deleteButton);
+
     return li;
+}
+
+function startEditingName(nameElement) {
+    const productElement = nameElement.closest(".product");
+    const id = Number(productElement.dataset.id);
+    const product = products.find(item => item.id === id);
+
+    if (!product || product.bought) return;
+
+    const editInput = document.createElement("input");
+    editInput.classList.add("editable");
+    editInput.value = product.name;
+
+    nameElement.replaceWith(editInput);
+    editInput.focus();
+
+    editInput.addEventListener("blur", () => {
+        const newName = editInput.value.trim();
+        if (newName) product.name = newName;
+        saveAndRender();
+    });
+
+    editInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") editInput.blur();
+    });
 }
 
 function renderSummary() {
@@ -143,4 +181,38 @@ function createSummaryItem(product) {
     amount.textContent = product.count;
     li.append(name, amount);
     return li;
+}
+
+function saveAndRender() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    render();
+}
+
+function loadProducts() {
+    const savedProducts = localStorage.getItem(STORAGE_KEY);
+
+    if (savedProducts) {
+        return JSON.parse(savedProducts);
+    }
+
+    return [
+        {
+            id: 1,
+            name: "Помідори",
+            count: 2,
+            bought: true
+        },
+        {
+            id: 2,
+            name: "Печиво",
+            count: 2,
+            bought: false
+        },
+        {
+            id: 3,
+            name: "Сир",
+            count: 1,
+            bought: false
+        }
+    ];
 }
